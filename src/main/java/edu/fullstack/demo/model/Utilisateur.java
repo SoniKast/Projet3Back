@@ -20,4 +20,6 @@ public class Utilisateur {
     protected String email;
     protected String password;
     protected String role;
+
+    protected String resetToken;  // This field stores the reset token
 }

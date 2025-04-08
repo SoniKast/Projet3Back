@@ -10,10 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -45,17 +44,17 @@ public class ConnexionController {
     @PostMapping("/connexion")
     public ResponseEntity<String> connexion(@RequestBody Utilisateur utilisateur) {
 
-       try {
-           MyUserDetails userDetails = (MyUserDetails) authenticationProvider
-                   .authenticate(new UsernamePasswordAuthenticationToken(
+        try {
+            MyUserDetails userDetails = (MyUserDetails) authenticationProvider
+                    .authenticate(new UsernamePasswordAuthenticationToken(
                             utilisateur.getEmail(),
                             utilisateur.getPassword()))
-                   .getPrincipal();
+                    .getPrincipal();
 
-           return new ResponseEntity<>(jwtUtils.generateJwt(userDetails), HttpStatus.OK);
+            return new ResponseEntity<>(jwtUtils.generateJwt(userDetails), HttpStatus.OK);
 
-       } catch (Exception e) {
-           return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-       }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

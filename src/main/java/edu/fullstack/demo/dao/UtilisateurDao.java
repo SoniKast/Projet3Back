@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer> {
 
     Optional<Utilisateur> findByEmail(String email);
+
+    Optional<Utilisateur> findByResetToken(String token);
 }

@@ -8,7 +8,7 @@ INSERT INTO place (numero) VALUES
 INSERT INTO utilisateur (email, password, role) VALUES
     ("a@a.com", "$2a$10$nLVdBRYM4XiE5kZ6rAS3K.PHdrjLz9kJ0WfsV2b2X9bxG5/WzCBlC", "ADMIN"),
     ("b@b.com", "$2a$10$nLVdBRYM4XiE5kZ6rAS3K.PHdrjLz9kJ0WfsV2b2X9bxG5/WzCBlC", "EMPLOYE"),
-    ("a@a.com", "$2a$10$FvOLNX2h89iF9X8L55zwdOcPuZXd46/.NJMGs.pRxvjPivdj1Ilam", "ADMIN"),
+    ("sonikast@hotmail.com", "$2a$10$Cc5cg6VKHhjCum62Wk1hpudlhiM6Oix2XlCcdM.XmDlvivD/44upG", "EMPLOYE"),
     ("c@c.com", "$2a$10$kuvZOI5QOB48igTviJ4puuNHw9OZoQRglThElxb60yAmCwobzS1k2", "ADMIN");
 
 INSERT INTO reservation (date_debut, date_fin, date_creation, place_id, utilisateur_id) VALUES
