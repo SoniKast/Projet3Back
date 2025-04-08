@@ -66,4 +66,10 @@ public class UtilisateurController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/utilisateur/exists")
+    public boolean checkEmail(@RequestParam String email){
+        System.out.println("Vérification email: " + email);
+        return utilisateurDao.findByEmail(email).isPresent();
+    }
 }

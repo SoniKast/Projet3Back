@@ -15,17 +15,16 @@ public interface PlaceDao extends JpaRepository<Place, Integer> {
 
     Optional<Place> findByNumero(String numero);
 
-    @Query("FROM Place p " +
+    @Query( "FROM Place p " +
             "JOIN p.reservations r " +
             "WHERE r.dateDebut <= :date " +
             "AND r.dateFin >= :date")
     List<Place> indisponibleLe(@Param("date") LocalDateTime date);
 
-    @Query("FROM Place p1 WHERE p1 NOT IN " +
+    @Query( "FROM Place p1 WHERE p1 NOT IN " +
             "(FROM Place p2 " +
             "JOIN p2.reservations r " +
             "WHERE r.dateDebut <= :date " +
             "AND r.dateFin >= :date)")
     List<Place> disponibleLe(@Param("date") LocalDateTime date);
-
 }
