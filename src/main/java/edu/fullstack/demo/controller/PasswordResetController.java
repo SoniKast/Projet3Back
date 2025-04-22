@@ -1,6 +1,7 @@
 package edu.fullstack.demo.controller;
 
 import edu.fullstack.demo.dao.UtilisateurDao;
+import edu.fullstack.demo.model.ResetPasswordClass;
 import edu.fullstack.demo.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -50,19 +51,19 @@ public class PasswordResetController {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ballamoussa57@gmail.com");
         message.setTo(email);
-        message.setSubject("Password Reset Request");
+        message.setSubject("Lien pour réinitialiser mot de passe");
         message.setText("Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous:\n" + resetUrl);
 
         emailSender.send(message);
     }
 
     @PostMapping("/reset-password")
-    public String resetPassword(@RequestParam String token, @RequestParam String newPassword) {
-        Optional<Utilisateur> utilisateur = utilisateurDao.findByResetToken(token);
+    public String resetPassword(@RequestBody ResetPasswordClass request) {
+        Optional<Utilisateur> utilisateur = utilisateurDao.findByResetToken(request.getToken());
 
         if (utilisateur.isPresent()) {
             Utilisateur utilisateurActuel = utilisateur.get();
-            utilisateurActuel.setPassword(encoder.encode(newPassword));  // Mot de passe encodé
+            utilisateurActuel.setPassword(encoder.encode(request.getNewPassword()));  // Mot de passe encodé
             utilisateurActuel.setResetToken(null);  // Vider le token après l'avoir utilisé
             utilisateurDao.save(utilisateurActuel);
             return "Mot de passe réinitialisé.";
